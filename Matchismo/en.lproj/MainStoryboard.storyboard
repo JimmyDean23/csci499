@@ -204,6 +204,9 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="dealNewGame:" destination="2" eventType="touchUpInside" id="w9G-sy-n1C"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="xjB-p3-aW1">
                                 <rect key="frame" x="20" y="178" width="50" height="72"/>
@@ -372,6 +375,9 @@
                                     <segment title="2"/>
                                     <segment title="3"/>
                                 </segments>
+                                <connections>
+                                    <action selector="switchGameType:" destination="2" eventType="valueChanged" id="5FY-MW-fba"/>
+                                </connections>
                             </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -380,6 +386,7 @@
                         <outlet property="flipResult" destination="xv4-xI-YUR" id="iQW-00-gUG"/>
                         <outlet property="flipsLabel" destination="mc5-rM-cO9" id="OlR-XV-uce"/>
                         <outlet property="scoreLabel" destination="Xsq-N5-NgD" id="Mni-ox-mcQ"/>
+                        <outlet property="switchGameSettings" destination="wrE-DO-6Md" id="F3X-8h-ysa"/>
                         <outletCollection property="cardButtons" destination="Lxd-tW-7Gp" id="vqZ-C1-AFi"/>
                         <outletCollection property="cardButtons" destination="tpf-Nl-QqX" id="soD-Eu-ARm"/>
                         <outletCollection property="cardButtons" destination="NuP-0N-mSh" id="k7e-nr-cDn"/>
@@ -407,18 +414,6 @@
             <point key="canvasLocation" x="19" y="108"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="CardGameViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CardGameViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="flipCard:" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="flipResult" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="flipsLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="scoreLabel" candidateClass="UILabel"/>
-                <relationship kind="outletCollection" name="cardButtons" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

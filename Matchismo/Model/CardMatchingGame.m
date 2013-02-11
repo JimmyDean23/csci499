@@ -11,16 +11,22 @@
 @interface CardMatchingGame()
 @property (strong, nonatomic) NSMutableArray *cards;
 @property (nonatomic) int score;
+@property (nonatomic) NSString *resultString;
+@property (nonatomic) int gameType;
 @end
 
 @implementation CardMatchingGame
+
+#define FLIP_COST 1
+#define MISMATCH_PENALTY 2
+#define MATCH_BONUS 4
 
 - (NSMutableArray *)cards {
     if (!_cards) _cards = [[NSMutableArray alloc] init];
     return _cards;
 }
 
-- (id)initWithCardCount:(NSUInteger)count usingDeck:(Deck *)deck {
+- (id)initWithCardCount:(NSUInteger)count usingDeck:(Deck *)deck setGameType:(int)type {
     self = [super init];
     if (self) {
         for (int i = 0; i < count; i++) {
@@ -31,6 +37,7 @@
                 self.cards[i] = card;
             }
         }
+        self.gameType = type;
     }
     return self;
 }
@@ -38,10 +45,6 @@
 - (Card *)cardAtIndex:(NSUInteger)index {
     return (index < self.cards.count) ? self.cards[index] : nil;
 }
-
-#define FLIP_COST 1
-#define MISMATCH_PENALTY 2
-#define MATCH_BONUS 4
 
 - (void)flipCardAtIndex:(NSUInteger)index {
     Card *card = [self cardAtIndex:index];
@@ -53,10 +56,10 @@
                     if (matchScore) {
                         otherCard.unplayable = YES;
                         card.unplayable = YES;
-                        self.score += matchScore * MATCH_BONUS;
+                        self.score += matchScore * MATCH_BONUS * self.gameType;
                     } else {
                         otherCard.faceUp = NO;
-                        self.score -= MISMATCH_PENALTY;
+                        self.score -= MISMATCH_PENALTY * self.gameType;
                     }
                     break;
                 }

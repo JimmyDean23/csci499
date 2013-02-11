@@ -17,13 +17,16 @@
 @property (strong, nonatomic) CardMatchingGame *game;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (weak, nonatomic) IBOutlet UILabel *flipResult;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *switchGameSettings;
+@property (nonatomic) int gameSetting;
 @end
 
 @implementation CardGameViewController
 
 - (CardMatchingGame *)game {
     if (!_game) _game = [[CardMatchingGame alloc] initWithCardCount:self.cardButtons.count
-                                                          usingDeck:[[PlayingCardDeck alloc] init]];
+                                                          usingDeck:[[PlayingCardDeck alloc] init]
+                                                        setGameType:self.gameSetting];
     return _game;
 }
 
@@ -49,6 +52,8 @@
         cardButton.alpha = card.isUnplayable ? 0.3 : 1.0;
     }
     self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
+    self.flipResult.text = self.game.resultString;
+    self.switchGameSettings.enabled = NO;
 }
 
 - (void)setFlipCount:(int)flipCount {
@@ -60,6 +65,17 @@
     [self.game flipCardAtIndex:[self.cardButtons indexOfObject:sender]];
     self.flipCount++;
     [self updateUI];
+}
+
+- (IBAction)switchGameType:(id)sender {
+    self.gameSetting = self.switchGameSettings.selectedSegmentIndex;
+}
+
+- (IBAction)dealNewGame:(id)sender {
+    self.game = nil;
+    self.flipCount = 0;
+    [self updateUI];
+    self.switchGameSettings.enabled = YES;
 }
 
 @end
