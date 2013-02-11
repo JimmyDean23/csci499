@@ -20,7 +20,7 @@
     return _cards;
 }
 
-- (id)initWithCardCount:(NSUInteger)cardCount usingDeck:(Deck *)deck {
+- (id)initWithCardCount:(NSUInteger)count usingDeck:(Deck *)deck {
     self = [super init];
     if (self) {
         for (int i = 0; i < count; i++) {
